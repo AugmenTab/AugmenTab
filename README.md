@@ -2,7 +2,7 @@
 
 Professional Haskell and FP enthusiast.
 
-Proud maintainer of the [Mythic for Foundry](https://www.github.com/AugmenTab/mythic) system.
+Proudly building and maintaining the [Mythic for Foundry](https://www.github.com/AugmenTab/mythic) system since June 16, 2021.
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=AugmenTab&layout=compact&theme=onedark&langs_count=6&hide=HTML,CSS,Handlebars,TeX)](https://github.com/anuraghazra/github-readme-stats)
 
