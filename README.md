@@ -1,5 +1,7 @@
 ### Hi there 👋
 
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=AugmenTab&layout=compact&langs_count=6&hide=HTML,CSS,Handlebars,TeX)](https://github.com/AugmenTab/github-readme-stats)
+
 <!--
 **AugmenTab/AugmenTab** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
