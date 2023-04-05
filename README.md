@@ -2,7 +2,9 @@
 
 Professional Haskell and FP enthusiast.
 
-Proudly building and maintaining the [Mythic for Foundry](https://www.github.com/AugmenTab/mythic) system since June 16, 2021.
+Proudly building and maintaining the Foundry VTT presence for the following systems:
+* [Mythic](https://www.github.com/AugmenTab/mythic) since June 16, 2021
+* [Anoxis Engine](https://github.com/Anoxis-Gate/anoxis-engine) since May 21, 2022
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=AugmenTab&layout=compact&theme=onedark&langs_count=6&hide=HTML,CSS,Handlebars,TeX)](https://github.com/anuraghazra/github-readme-stats)
 
