@@ -1,0 +1,64 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           auditor
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/auditor#readme>
+homepage:       https://github.com/AugmenTab/AugmenTab#readme
+bug-reports:    https://github.com/AugmenTab/AugmenTab/issues
+author:         Tyler Baum
+maintainer:     tyler.baum@protonmail.com
+copyright:      2023 Tyler Baum
+license:        BSD3
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/AugmenTab/AugmenTab
+
+library
+  other-modules:
+      Paths_auditor
+  hs-source-dirs:
+      src
+  default-extensions:
+      DeriveDataTypeable
+      DerivingStrategies
+      FlexibleContexts
+      GeneralizedNewtypeDeriving
+      MultiParamTypeClasses
+      NoImplicitPrelude
+      OverloadedStrings
+  ghc-options: -j -Werror -Wall -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -Wmissing-deriving-strategies -Wmissing-export-lists -fno-warn-orphans
+  build-depends:
+      base >=4.7 && <5
+    , flipstone-prelude
+    , text
+  default-language: Haskell2010
+
+executable auditor-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_auditor
+  hs-source-dirs:
+      app
+  default-extensions:
+      DeriveDataTypeable
+      DerivingStrategies
+      FlexibleContexts
+      GeneralizedNewtypeDeriving
+      MultiParamTypeClasses
+      NoImplicitPrelude
+      OverloadedStrings
+  ghc-options: -j -Werror -Wall -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -Wmissing-deriving-strategies -Wmissing-export-lists -fno-warn-orphans -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      auditor
+    , base >=4.7 && <5
+    , flipstone-prelude
+    , text
+  default-language: Haskell2010
