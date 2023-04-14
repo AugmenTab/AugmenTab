@@ -3,9 +3,12 @@ module Main
   ) where
 
 import           Flipstone.Prelude
+import qualified Auditor.Config as Config
 
 import qualified Data.Text.IO  as IO
 
 main :: IO ()
 main = do
-  IO.putStrLn "Hello, world!"
+  _config <- Config.loadConfigOrDie
+
+  IO.putStrLn "Config loaded!"

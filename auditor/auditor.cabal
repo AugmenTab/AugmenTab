@@ -22,6 +22,10 @@ source-repository head
   location: https://github.com/AugmenTab/AugmenTab
 
 library
+  exposed-modules:
+      Auditor.Config
+      Auditor.Types
+      Auditor.YAML
   other-modules:
       Paths_auditor
   hs-source-dirs:
@@ -36,7 +40,9 @@ library
       OverloadedStrings
   ghc-options: -j -Werror -Wall -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -Wmissing-deriving-strategies -Wmissing-export-lists -fno-warn-orphans
   build-depends:
-      base >=4.7 && <5
+      HsYAML
+    , base >=4.7 && <5
+    , bytestring
     , flipstone-prelude
     , text
   default-language: Haskell2010
@@ -57,8 +63,10 @@ executable auditor-exe
       OverloadedStrings
   ghc-options: -j -Werror -Wall -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -Wmissing-deriving-strategies -Wmissing-export-lists -fno-warn-orphans -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      auditor
+      HsYAML
+    , auditor
     , base >=4.7 && <5
+    , bytestring
     , flipstone-prelude
     , text
   default-language: Haskell2010
