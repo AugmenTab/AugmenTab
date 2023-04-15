@@ -1,6 +1,7 @@
 module Auditor.YAML
   ( YAML.FromYAML(..)
   , (YAML..:)
+  , (YAML..:?)
   , YAML.withMap
 
   -- Project-specific helpers

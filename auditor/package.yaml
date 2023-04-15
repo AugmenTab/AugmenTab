@@ -23,6 +23,8 @@ dependencies:
 - bytestring
 - flipstone-prelude
 - HsYAML
+- http-client
+- http-conduit
 - text
 
 default-extensions:

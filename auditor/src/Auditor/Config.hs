@@ -11,6 +11,7 @@ import           Control.Exception (SomeException, catch)
 import qualified Data.ByteString.Lazy.Char8 as LBS8
 import           System.Exit (ExitCode(..), exitWith)
 import qualified Data.Text as T
+import qualified Network.HTTP.Simple as HTTP
 import qualified System.IO as IO
 import           Text.Show (show)
 
@@ -19,6 +20,7 @@ data AuditorConfig =
     { auditorConfigAuthors  :: [Author]
     , auditorConfigEmails   :: [Email]
     , auditorConfigFilepath :: Filepath
+    , auditorConfigRequest  :: HTTP.Request
     }
 
 instance FromYAML AuditorConfig where
@@ -27,6 +29,11 @@ instance FromYAML AuditorConfig where
       <$> m .: "authors"
       <*> m .: "emails"
       <*> m .: "repo_path"
+      <*> (parseURL =<< m .: "languages_url")
+
+parseURL :: MonadFail m => T.Text -> m HTTP.Request
+parseURL =
+  maybe (fail "URL is not a valid format") pure . HTTP.parseRequest . T.unpack
 
 loadConfigOrDie :: IO AuditorConfig
 loadConfigOrDie = do
