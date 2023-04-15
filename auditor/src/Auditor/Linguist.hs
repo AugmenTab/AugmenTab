@@ -14,6 +14,7 @@ import qualified Data.List as L
 import qualified Data.Map as Map
 import           Data.Maybe (mapMaybe)
 import qualified Data.Text as T
+import qualified Data.Text.IO as IO
 import qualified Data.Text.Encoding as TE
 import           Data.Tuple (fst)
 import qualified Network.HTTP.Client as HTTP
@@ -21,7 +22,8 @@ import           Network.HTTP.Conduit (tlsManagerSettings)
 
 getLanguages :: Config.AuditorConfig -> IO (Either T.Text [Language])
 getLanguages config = do
-  manager  <- HTTP.newManager tlsManagerSettings
+  IO.putStrLn "Fetching languages..."
+  manager <- HTTP.newManager tlsManagerSettings
   fmap (decodeYAML' . prepareDocument . HTTP.responseBody) $
     HTTP.httpLbs (Config.auditorConfigRequest config) manager
 

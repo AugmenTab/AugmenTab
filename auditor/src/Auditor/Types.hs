@@ -3,7 +3,7 @@ module Auditor.Types
   , Color
   , Email, emailToText
   , Extension
-  , Filepath, filepathToText
+  , Filepath
   , Language(..)
   , LanguageName
   , LanguageType(..), languageTypeFromText
@@ -47,11 +47,7 @@ newtype Extension = Extension T.Text
 {-| Filepath is taking the place of `System.IO`'s `FilePath`, but instead as a
    `Text` for the purposes of dealing with `Data.YAML`.
  -}
-newtype Filepath = Filepath T.Text
-  deriving newtype FromYAML
-
-filepathToText :: Filepath -> T.Text
-filepathToText (Filepath t) = t
+type Filepath = T.Text
 
 {-| A Language is a record with relevant information for a programming language
    as it is represented in linguist.

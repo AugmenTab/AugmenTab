@@ -4,16 +4,16 @@ module Main
 
 import           Flipstone.Prelude
 import qualified Auditor.Config as Config
+import qualified Auditor.Git as Git
 import qualified Auditor.Linguist as Linguist
 
-import qualified Data.Text.IO  as IO
+import qualified Data.Text.IO as IO
 
 main :: IO ()
 main = do
-  config <- Config.loadConfigOrDie
-  languages <- ffmap Linguist.mkLanguageMap $ Linguist.getLanguages config
+  config  <- Config.loadConfigOrDie
+  _commits <- Git.getCommitHistory $ Config.auditorConfigFilepath config
+  _langMap <- ffmap Linguist.mkLanguageMap $ Linguist.getLanguages config
 
-  IO.putStrLn $
-    case languages of
-      Left  err    -> err
-      Right _langs -> "Languages loaded!"
+  Git.deleteCommitFile
+  IO.putStrLn "Done."

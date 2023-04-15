@@ -24,6 +24,7 @@ source-repository head
 library
   exposed-modules:
       Auditor.Config
+      Auditor.Git
       Auditor.Linguist
       Auditor.Types
       Auditor.YAML
@@ -45,9 +46,12 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , directory
+    , filepath
     , flipstone-prelude
     , http-client
     , http-conduit
+    , process
     , text
   default-language: Haskell2010
 
@@ -72,8 +76,11 @@ executable auditor-exe
     , base >=4.7 && <5
     , bytestring
     , containers
+    , directory
+    , filepath
     , flipstone-prelude
     , http-client
     , http-conduit
+    , process
     , text
   default-language: Haskell2010

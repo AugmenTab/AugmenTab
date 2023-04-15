@@ -22,10 +22,13 @@ dependencies:
 - base >= 4.7 && < 5
 - bytestring
 - containers
+- directory
+- filepath
 - flipstone-prelude
 - HsYAML
 - http-client
 - http-conduit
+- process
 - text
 
 default-extensions:
