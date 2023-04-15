@@ -1,9 +1,9 @@
 deletions: 58
-insertions: 803
+insertions: 805
 language: YAML
 ...
 deletions: 2
-insertions: 14133
+insertions: 14204
 language: Vim Help File
 ...
 deletions: 0
@@ -50,8 +50,8 @@ deletions: 10
 insertions: 577
 language: Ignore List
 ...
-deletions: 1507
-insertions: 8654
+deletions: 1516
+insertions: 8841
 language: Haskell
 ...
 deletions: 5696
@@ -63,7 +63,7 @@ insertions: 56
 language: HTML
 ...
 deletions: 73
-insertions: 570
+insertions: 574
 language: Cabal Config
 ...
 deletions: 108

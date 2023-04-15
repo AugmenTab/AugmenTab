@@ -6,3 +6,12 @@ My motivation to build this project is to create a more honest representation of
 
 So instead, this looks at every commit I've ever made and finds the sum total of insertions and deletions on a per-language basis. This will run on a nightly basis to keep the information reasonably up-to-date. Using this data, I intend to present more accurate data on myself as a developer, for whatever interested parties might be seeking it out.
 
+To-Do:
+- Use commit metrics to make a stats card to reference in the repo `README`.
+- Write script to run this job every night and commit/push the results at 2 am (local time).
+
+Some improvement ideas:
+- Take a list of repository paths in the config rather than assuming all repos will be in a single parent directory.
+- Write an example script for the cron job.
+- If it ever sees any use, consider adding themes and arguments to fine-tune the presentation of and data on the card.
+

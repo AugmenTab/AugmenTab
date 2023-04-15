@@ -1,0 +1,14 @@
+---
+# `authors` requires a list of strings representing the name of a commit author you want to include in the metrics.
+authors:
+  - "<author>"
+
+# `emails` requires a list of strings representing emails for a commit author you want to include in the metrics.
+emails:
+  - "<email>"
+
+# `repo_path` requires a string representation of the relative path to the list of repos for which you want metrics.
+repo_path: "<path>"
+
+# `languages_url` is the link to the latest GitHub Linguist known language list, and should not be altered.
+languages_url: "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
