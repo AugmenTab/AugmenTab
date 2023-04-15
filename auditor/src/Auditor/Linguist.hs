@@ -1,5 +1,7 @@
+{-# LANGUAGE TupleSections #-}
 module Auditor.Linguist
-  ( getLanguageMap
+  ( getLanguages
+  , mkLanguageMap
   ) where
 
 import           Flipstone.Prelude
@@ -9,17 +11,26 @@ import           Auditor.YAML
 
 import qualified Data.ByteString.Lazy as LBS
 import qualified Data.List as L
+import qualified Data.Map as Map
+import           Data.Maybe (mapMaybe)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
 import           Data.Tuple (fst)
 import qualified Network.HTTP.Client as HTTP
 import           Network.HTTP.Conduit (tlsManagerSettings)
 
-getLanguageMap :: Config.AuditorConfig -> IO (Either T.Text [Language])
-getLanguageMap config = do
+getLanguages :: Config.AuditorConfig -> IO (Either T.Text [Language])
+getLanguages config = do
   manager  <- HTTP.newManager tlsManagerSettings
   fmap (decodeYAML' . prepareDocument . HTTP.responseBody) $
     HTTP.httpLbs (Config.auditorConfigRequest config) manager
+
+mkLanguageMap :: [Language] -> Map.Map Extension LanguageName
+mkLanguageMap languages =
+  Map.fromList
+    $ concat
+    $ flip mapMaybe languages
+    $ \lang -> ffmap (, languageName lang) (languageExtensions lang)
 
 prepareDocument :: LBS.ByteString -> LBS.ByteString
 prepareDocument =

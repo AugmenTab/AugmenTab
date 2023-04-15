@@ -42,7 +42,7 @@ emailToText (Email t) = t
    language.
  -}
 newtype Extension = Extension T.Text
-  deriving newtype FromYAML
+  deriving newtype (Eq, Ord, FromYAML)
 
 {-| Filepath is taking the place of `System.IO`'s `FilePath`, but instead as a
    `Text` for the purposes of dealing with `Data.YAML`.

@@ -11,7 +11,7 @@ import qualified Data.Text.IO  as IO
 main :: IO ()
 main = do
   config <- Config.loadConfigOrDie
-  languages <- Linguist.getLanguageMap config
+  languages <- ffmap Linguist.mkLanguageMap $ Linguist.getLanguages config
 
   IO.putStrLn $
     case languages of
