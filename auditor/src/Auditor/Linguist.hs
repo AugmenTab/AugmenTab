@@ -1,6 +1,7 @@
 {-# LANGUAGE TupleSections #-}
 module Auditor.Linguist
   ( getLanguages
+  , mkExtensionMap
   , mkLanguageMap
   ) where
 
@@ -27,12 +28,15 @@ getLanguages config = do
   fmap (decodeYAML' . prepareDocument . HTTP.responseBody) $
     HTTP.httpLbs (Config.auditorConfigRequest config) manager
 
-mkLanguageMap :: [Language] -> Map.Map Extension LanguageName
-mkLanguageMap languages =
+mkExtensionMap :: [Language] -> Map.Map Extension LanguageName
+mkExtensionMap languages =
   Map.fromList
     $ concat
     $ flip mapMaybe languages
     $ \lang -> ffmap (, languageName lang) (languageExtensions lang)
+
+mkLanguageMap :: [Language] -> Map.Map LanguageName Language
+mkLanguageMap = Map.fromList . fmap (\lang -> (languageName lang, lang))
 
 prepareDocument :: LBS.ByteString -> LBS.ByteString
 prepareDocument =

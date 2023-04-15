@@ -1,0 +1,71 @@
+deletions: 58
+insertions: 803
+language: YAML
+...
+deletions: 2
+insertions: 14133
+language: Vim Help File
+...
+deletions: 0
+insertions: 11
+language: TOML
+...
+deletions: 0
+insertions: 51
+language: Solidity
+...
+deletions: 0
+insertions: 359
+language: SVG
+...
+deletions: 97
+insertions: 2518
+language: Racket
+...
+deletions: 1529
+insertions: 2791
+language: Python
+...
+deletions: 283
+insertions: 283
+language: "Objective-C"
+...
+deletions: 14667
+insertions: 89964
+language: "OASv3-json"
+...
+deletions: 1209
+insertions: 4277
+language: Markdown
+...
+deletions: 872
+insertions: 2094
+language: Less
+...
+deletions: 6681
+insertions: 16283
+language: JavaScript
+...
+deletions: 10
+insertions: 577
+language: Ignore List
+...
+deletions: 1507
+insertions: 8654
+language: Haskell
+...
+deletions: 5696
+insertions: 12277
+language: Handlebars
+...
+deletions: 4
+insertions: 56
+language: HTML
+...
+deletions: 73
+insertions: 570
+language: Cabal Config
+...
+deletions: 108
+insertions: 162
+language: CSS

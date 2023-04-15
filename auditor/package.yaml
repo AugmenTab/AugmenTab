@@ -20,6 +20,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- attoparsec
 - bytestring
 - containers
 - directory
@@ -29,6 +30,7 @@ dependencies:
 - http-client
 - http-conduit
 - process
+- split
 - text
 
 default-extensions:
