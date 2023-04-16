@@ -92,7 +92,7 @@ type Filepath = T.Text
    otherwise modified code for a given language.
  -}
 newtype Insertions = Insertions Natural
-  deriving newtype (Num, ToYAML)
+  deriving newtype (Eq, Num, Ord, ToYAML)
 
 mkInsertions :: Natural -> Insertions
 mkInsertions = Insertions
@@ -128,6 +128,7 @@ data LanguageType
   | Programming
   | Prose
   | Nil
+  deriving stock (Eq)
 
 languageTypeFromText :: T.Text -> Either T.Text LanguageType
 languageTypeFromText txt =

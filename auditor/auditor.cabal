@@ -26,6 +26,7 @@ library
       Auditor.Config
       Auditor.Git
       Auditor.Linguist
+      Auditor.SVG
       Auditor.Types
       Auditor.YAML
   other-modules:
@@ -45,6 +46,9 @@ library
       HsYAML
     , attoparsec
     , base >=4.7 && <5
+    , blaze-html
+    , blaze-markup
+    , blaze-svg
     , bytestring
     , containers
     , directory
@@ -77,6 +81,9 @@ executable auditor-exe
     , attoparsec
     , auditor
     , base >=4.7 && <5
+    , blaze-html
+    , blaze-markup
+    , blaze-svg
     , bytestring
     , containers
     , directory

@@ -1,13 +1,10 @@
 module Auditor.Git
   ( getCommitHistory
   , buildCommitRecord
-  , deleteCommitFile
-  , writeCommitRecords
   ) where
 
 import           Flipstone.Prelude
 import           Auditor.Types
-import           Auditor.YAML
 
 import           Control.Monad (filterM, mapM_)
 import qualified Data.Attoparsec.Text as Atto
@@ -124,16 +121,3 @@ insertCommitData commitMap lang commitData =
 
 combineCommitData :: CommitData -> CommitData -> CommitData
 combineCommitData (ins1, dels1) (ins2, dels2) = (ins1 + ins2, dels1 + dels2)
-
-deleteCommitFile :: IO ()
-deleteCommitFile = do
-  IO.putStrLn "Deleting commit file..."
-  Directory.removeFile commitFilepathFromAuditor
-
-recordsFilepathFromAuditor :: Filepath
-recordsFilepathFromAuditor = "../commit-records.txt"
-
-writeCommitRecords :: [CommitRecord] -> IO ()
-writeCommitRecords records = do
-  IO.putStrLn "Writing commit records..."
-  IO.writeFile (T.unpack recordsFilepathFromAuditor) $ encodeYAML' records
