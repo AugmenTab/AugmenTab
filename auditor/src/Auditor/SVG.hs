@@ -43,18 +43,16 @@ svgFilepathFromAuditor = "../profile-card.svg"
 
 profileSVG :: H.Html -> [(CommitRecord, Language)] -> Blaze.Markup
 profileSVG styles langs =
-  Svg.svg
-    ! Svg.fill "none"
-    ! Svg.viewbox "0 0 600 400"
-    ! Svg.width "600"
-    ! Svg.height "400"
-    $ Svg.foreignobject
-        ! Svg.width "100%"
-        ! Svg.height "100%"
-        $ profileContent styles langs
+  Svg.svg !* [ Svg.fill "none"
+             , Svg.viewbox "0 0 600 400"
+             , Svg.width "600"
+             , Svg.height "400"
+             ] $ do
+    Svg.foreignobject !* [ Svg.width "100%", Svg.height "100%" ] $ do
+        profileContent styles langs
 
 profileContent :: H.Html -> [(CommitRecord, Language)] -> Blaze.Markup
-profileContent styles _langs = -- TODO
+profileContent styles langs =
   H.div ! A.xmlns "http://www.w3.org/1999/xhtml" $ do
     H.style styles
     H.div ! A.class_ "body" $ do
@@ -64,17 +62,54 @@ profileContent styles _langs = -- TODO
             H.span $ H.em "tyler baum"
             H.span $ H.em "tyler baum"
             H.span $ H.em "tyler baum"
-        H.section ! A.class_ "items" $ do
-          H.ul $ do
-            H.li "Haskell Developer"
-          H.ul $ do
-            H.li $ do
-              H.text "at "
-              H.a ! A.href "https://flipstone.com/" $ do
-                H.text "Flipstone Technology Partners"
-          H.ul $ do
-            H.li $ do
-              H.a
-                ! A.href "mailto:tyler.baum@protonmail.com"
-                ! A.role "button"
-                $ H.span ! A.class_ "hi" $ "👋"
+        H.section ! A.class_ "slider-container" $ do
+          H.div ! A.class_ "slider" $ do
+            H.div ! A.class_ "slides" $ do
+              makeDetailCard
+              makeLanguageCard langs
+              makeFoundryCard
+
+previousCardLink :: Svg.AttributeValue -> Blaze.Markup
+previousCardLink link =
+  H.a !* [ A.class_ "slide__prev", A.href link, A.title "Prev"] $ mempty
+
+nextCardLink :: Svg.AttributeValue -> Blaze.Markup
+nextCardLink link =
+  H.a !* [ A.class_ "slide__next", A.href link, A.title "Next"] $ mempty
+
+makeDetailCard :: Blaze.Markup
+makeDetailCard =
+  H.div !* [ A.id "slides__1", A.class_ "slide" ] $ do
+    H.div ! A.class_ "details" $ do
+      H.p "Haskell Developer"
+      H.p $ do
+        H.a ! A.href "https://flipstone.com/" $ do
+          H.text "Flipstone Technology Partners"
+      H.p $ do
+        H.a !* [ A.href "mailto:tyler.baum@protonmail.com"
+               , A.role "button"
+               ] $ do
+          H.text "EMAIL ME"
+    previousCardLink "#slides__3"
+    nextCardLink "#slides__2"
+
+makeLanguageCard :: [(CommitRecord, Language)] -> Blaze.Markup
+makeLanguageCard _langs =
+  H.div !* [ A.id "slides__2", A.class_ "slide" ] $ do
+ -- H.text "" TODO
+    previousCardLink "#slides__1"
+    nextCardLink "#slides__3"
+
+makeFoundryCard :: Blaze.Markup
+makeFoundryCard =
+  H.div !* [ A.id "slides__3", A.class_ "slide" ] $ do
+ -- H.text "" TODO
+    previousCardLink "#slides__2"
+    nextCardLink "#slides__1"
+
+{-| Takes an element and a list of attributes, and applies the attributes to
+   the element in the order given. The operator is meant to convey: perform the
+   (!) operation multiple times.
+ -}
+(!*) :: (H.Html -> H.Html) -> [Svg.Attribute] -> H.Html -> H.Html
+element !* attributes = L.foldl' (!) element attributes

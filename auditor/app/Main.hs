@@ -1,5 +1,6 @@
 module Main
   ( main
+  , test
   ) where
 
 import           Flipstone.Prelude
@@ -9,6 +10,7 @@ import qualified Auditor.Linguist as Linguist
 import qualified Auditor.SVG as SVG
 import           Auditor.Types
 
+import qualified Data.Map as Map
 import qualified Data.Set as Set
 import qualified Data.Text.IO as IO
 
@@ -34,3 +36,6 @@ main = do
 
       -- TODO: commit and push to GitHub when run
       IO.putStrLn "Done."
+
+test :: IO ()
+test = SVG.makeProfileSVG Map.empty []
