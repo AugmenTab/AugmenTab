@@ -59,9 +59,9 @@ profileContent styles langs =
       H.div ! A.class_ "container" $ do
         H.h1 $ do
           H.a ! A.href "https://github.com/AugmenTab" $ do
-            H.span $ H.em "tyler baum"
-            H.span $ H.em "tyler baum"
-            H.span $ H.em "tyler baum"
+            H.span $ H.em "Tyler Baum"
+            H.span $ H.em "Tyler Baum"
+            H.span $ H.em "Tyler Baum"
         H.section ! A.class_ "slider-container" $ do
           H.div ! A.class_ "slider" $ do
             H.div ! A.class_ "slides" $ do

@@ -25,8 +25,9 @@ getLanguages :: Config.AuditorConfig -> IO (Either T.Text [Language])
 getLanguages config = do
   IO.putStrLn "Fetching languages..."
   manager <- HTTP.newManager tlsManagerSettings
-  fmap (decodeYAML' . prepareDocument . HTTP.responseBody) $
-    HTTP.httpLbs (Config.auditorConfigRequest config) manager
+  ffmap (L.filter ((==) Programming . languageType))
+    $ fmap (decodeYAML' . prepareDocument . HTTP.responseBody)
+    $ HTTP.httpLbs (Config.auditorConfigRequest config) manager
 
 mkExtensionMap :: [Language] -> Map.Map Extension LanguageName
 mkExtensionMap languages =

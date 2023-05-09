@@ -138,7 +138,7 @@ languageTypeFromText txt =
     "programming" -> Right Programming
     "prose"       -> Right Prose
     "nil"         -> Right Nil
-    _ -> Left $ "Unrecognized LanguageType " <> txt
+    _             -> Left $ "Unrecognized LanguageType " <> txt
 
 tryParseLanguageType :: MonadFail m => T.Text -> m LanguageType
 tryParseLanguageType = either (fail . T.unpack) pure . languageTypeFromText
