@@ -8,10 +8,11 @@ So instead, this looks at every commit I've ever made and finds the sum total of
 
 To-Do:
 - Use commit metrics to make a stats card to reference in the repo `README`.
+- Introduce other cards to promote projects.
 - Write script to run this job every night and commit/push the results at 2 am (local time).
+- Figure out a way to persist data so only the last 24 hours of commits have to be read.
 
 Some improvement ideas:
 - Take a list of repository paths in the config rather than assuming all repos will be in a single parent directory.
 - Write an example script for the cron job.
 - If it ever sees any use, consider adding themes and arguments to fine-tune the presentation of and data on the card.
-
