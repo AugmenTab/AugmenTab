@@ -7,8 +7,13 @@ authors:
 emails:
   - "<email>"
 
-# `repo_path` requires a string representation of the relative path to the list of repos for which you want metrics.
-repo_path: "<path>"
+# `repo_path` requires an array of string representation of the absolute path to the list of repos for which you want metrics.
+repo_paths:
+  - "<path>"
+
+# `exclude_repos` requires an array of string representation of the absolute path to the list of repos that should be removed from consideration.
+repo_paths:
+  - "<path>"
 
 # `languages_url` is the link to the latest GitHub Linguist known language list, and should not be altered.
 languages_url: "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"

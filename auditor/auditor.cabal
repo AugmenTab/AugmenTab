@@ -52,6 +52,7 @@ library
     , bytestring
     , containers
     , directory
+    , extra
     , filepath
     , flipstone-prelude
     , http-client
@@ -87,6 +88,7 @@ executable auditor-exe
     , bytestring
     , containers
     , directory
+    , extra
     , filepath
     , flipstone-prelude
     , http-client

@@ -17,10 +17,11 @@ import           Text.Show (show)
 
 data AuditorConfig =
   AuditorConfig
-    { auditorConfigAuthors  :: [Author]
-    , auditorConfigEmails   :: [Email]
-    , auditorConfigFilepath :: Filepath
-    , auditorConfigRequest  :: HTTP.Request
+    { auditorConfigAuthors      :: [Author]
+    , auditorConfigEmails       :: [Email]
+    , auditorConfigRepoPaths    :: [Filepath]
+    , auditorConfigExcludeRepos :: [Filepath]
+    , auditorConfigRequest      :: HTTP.Request
     }
 
 instance FromYAML AuditorConfig where
@@ -28,7 +29,8 @@ instance FromYAML AuditorConfig where
     AuditorConfig
       <$> m .: "authors"
       <*> m .: "emails"
-      <*> m .: "repo_path"
+      <*> m .: "repo_paths"
+      <*> m .: "exclude_repos"
       <*> (parseURL =<< m .: "languages_url")
 
 parseURL :: MonadFail m => T.Text -> m HTTP.Request

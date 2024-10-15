@@ -4,12 +4,15 @@ module Auditor.Git
   ) where
 
 import           Flipstone.Prelude
+import           Auditor.Config (AuditorConfig (..))
 import           Auditor.Types
 
 import           Control.Monad (filterM, mapM_)
+import           Control.Monad.Extra (concatMapM)
 import qualified Data.Attoparsec.Text as Atto
 import qualified Data.Char as C
 import qualified Data.List as L
+import qualified Data.List.Extra as L
 import qualified Data.List.Split as L
 import qualified Data.Map as Map
 import qualified Data.Set as Set
@@ -19,17 +22,33 @@ import qualified Data.Text.Lazy as TL
 import           Data.Text.Lazy.IO (readFile)
 import           Data.Tuple (uncurry)
 import qualified System.Directory as Directory
-import           System.FilePath ((</>))
 import           System.Process (callCommand)
 import           Text.Read (readMaybe)
 
-getCommitHistory :: Filepath -> IO TL.Text
-getCommitHistory fp = do
-  mapM_ (writeRepositoryCommits fp . T.pack)
-    =<< filterM (Directory.doesDirectoryExist . (T.unpack fp </>))
-    =<< Directory.listDirectory (T.unpack fp)
+getCommitHistory :: AuditorConfig -> IO TL.Text
+getCommitHistory config = do
+  allRepos <- concatMapM listAllRepos $ auditorConfigRepoPaths config
+  excluded <- concatMapM listAllRepos $ auditorConfigExcludeRepos config
+
+  let
+    repos =
+      Set.toList $
+        Set.difference (Set.fromList allRepos) (Set.fromList excluded)
+
+  mapM_ writeRepositoryCommits
+    =<< filterM (Directory.doesDirectoryExist . T.unpack )
+    =<< concatMapM listAllRepos repos
 
   readFile commitFilepathFromAuditor
+
+listAllRepos :: Filepath -> IO [Filepath]
+listAllRepos fp =
+  case L.unsnoc $ T.split ('/' ==) fp of
+    Just (pieces, "*") -> do
+      let base = T.intercalate "/" pieces <> "/"
+      ffmap ((<>) base . T.pack) . Directory.listDirectory $ T.unpack base
+    _ ->
+      pure [fp]
 
 commitFilepathFromRepo :: Filepath
 commitFilepathFromRepo = "../commits.txt"
@@ -37,13 +56,14 @@ commitFilepathFromRepo = "../commits.txt"
 commitFilepathFromAuditor :: String
 commitFilepathFromAuditor = "../" <> T.unpack commitFilepathFromRepo
 
-writeRepositoryCommits :: Filepath -> Filepath -> IO ()
-writeRepositoryCommits fp repo = do
+writeRepositoryCommits :: Filepath -> IO ()
+writeRepositoryCommits repo = do
   IO.putStrLn $ "Pulling and writing " <> repo <> "..."
   callCommand
     $ T.unpack
     $ T.intercalate " && "
-        [ "cd " <> fp <> repo
+        [ "cd " <> repo
+        , "git switch $(git remote show origin | awk '/HEAD branch/ {print $NF}')"
         , "git pull"
         , "git log --numstat >> " <> commitFilepathFromRepo
         ]

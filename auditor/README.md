@@ -11,8 +11,8 @@ To-Do:
 - Introduce other cards to promote projects.
 - Write script to run this job every night and commit/push the results at 2 am (local time).
 - Figure out a way to persist data so only the last 24 hours of commits have to be read.
+- Make a more targeted list of languages to restrict the Linguist list. This will hopefully help prevent weird languages being presented in the commit records, like Objective-C or GCC Machine Description.
 
 Some improvement ideas:
-- Take a list of repository paths in the config rather than assuming all repos will be in a single parent directory.
 - Write an example script for the cron job.
 - If it ever sees any use, consider adding themes and arguments to fine-tune the presentation of and data on the card.
